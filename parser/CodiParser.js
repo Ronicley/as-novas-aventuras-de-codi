@@ -1,7 +1,6 @@
 // Generated from Codi.g4 by ANTLR 4.7.2
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
-var CodiListener = require('./CodiListener').CodiListener;
 var CodiVisitor = require('./CodiVisitor').CodiVisitor;
 
 var grammarFileName = "Codi.g4";
@@ -118,19 +117,6 @@ ProgramaContext.prototype.NEWLINE = function (i) {
     }
 };
 
-
-ProgramaContext.prototype.enterRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.enterPrograma(this);
-    }
-};
-
-ProgramaContext.prototype.exitRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.exitPrograma(this);
-    }
-};
-
 ProgramaContext.prototype.accept = function (visitor) {
     if (visitor instanceof CodiVisitor) {
         return visitor.visitPrograma(this);
@@ -214,17 +200,6 @@ LinhaContext.prototype.parametro = function (i) {
     }
 };
 
-LinhaContext.prototype.enterRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.enterLinha(this);
-    }
-};
-
-LinhaContext.prototype.exitRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.exitLinha(this);
-    }
-};
 
 LinhaContext.prototype.accept = function (visitor) {
     if (visitor instanceof CodiVisitor) {
@@ -303,18 +278,6 @@ ComandoContext.prototype.PULA = function () {
     return this.getToken(CodiParser.PULA, 0);
 };
 
-ComandoContext.prototype.enterRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.enterComando(this);
-    }
-};
-
-ComandoContext.prototype.exitRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.exitComando(this);
-    }
-};
-
 ComandoContext.prototype.accept = function (visitor) {
     if (visitor instanceof CodiVisitor) {
         return visitor.visitComando(this);
@@ -377,18 +340,6 @@ ParametroContext.prototype.constructor = ParametroContext;
 
 ParametroContext.prototype.INT = function () {
     return this.getToken(CodiParser.INT, 0);
-};
-
-ParametroContext.prototype.enterRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.enterParametro(this);
-    }
-};
-
-ParametroContext.prototype.exitRule = function (listener) {
-    if (listener instanceof CodiListener) {
-        listener.exitParametro(this);
-    }
 };
 
 ParametroContext.prototype.accept = function (visitor) {
