@@ -12,6 +12,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar fixed-top navbar-dark bg-dark">
         <span class="navbar-brand h1">Koder!</span>
@@ -29,7 +30,7 @@
     <div class="canvas-console">
         <div id="game"></div>
         <div id="log">
-            Erros:<br/>
+            Erros:<br />
         </div>
     </div>
     <div class="input-div">
@@ -146,22 +147,33 @@
             if (gameOver) {
                 return;
             }
+            var comando = comandos.shift();
+            var teste = 0
 
-            if (cursors.left.isDown) {
-                player.setVelocityX(-160);
-                player.anims.play('left', true);
-            }
-            else if (cursors.right.isDown) {
-                player.setVelocityX(160);
-                player.anims.play('right', true);
-            }
-            else {
-                player.setVelocityX(0);
-                player.anims.play('turn');
-            }
-
-            if (cursors.up.isDown && player.body.touching.down) {
-                player.setVelocityY(-330);
+            if (comando) {
+                while (teste <= comando.argumento) {
+                    console.log("aaa", teste)
+                    if (comando.comando == 'esquerda' && teste <= comando.argumento) {
+                        player.setVelocityX(-160);
+                        player.anims.play('left', true);
+                        teste++
+                        // player.x -= comando.argumento * 10;
+                    }
+                    if (comando.comando == 'direita') {
+                        player.setVelocityX(200);
+                        player.anims.play('right', true);
+                        // player.x += comando.argumento * 10;
+                    }
+                    if (comando.comando == 'pula') {
+                        player.y -= comando.argumento * 10;
+                    }
+                    console.log("bbbbbbbbbbbbbbb", teste)
+                    if (teste >= comando.argumento) {
+                        player.anims.play('turn', true);
+                        player.setVelocityX(0);
+                    }
+                    setInterval(1000);
+                }
             }
         }
 
@@ -177,12 +189,6 @@
                 });
 
                 var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-                // var bomb = bombs.create(x, 16, 'bomb');
-                // bomb.setBounce(1);
-                // bomb.setCollideWorldBounds(true);
-                // bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-                // bomb.allowGravity = false;
             }
         }
         function hitBomb(player, bomb) {
@@ -192,22 +198,27 @@
             gameOver = true;
         }
         function play() {
-            var comando = comandos.shift();
-            if (comando) {
-                if (comando.comando == 'esquerda') {
-                    player.setVelocityX(-160);
-                    player.anims.play('left', true);
-                    player.x -= comando.argumento * 10;
-                }
-                if (comando.comando == 'direita') {
-                    player.setVelocityX(160);
-                player.anims.play('right', true);
-                player.x += comando.argumento * 10;
-                }
-                if (comando.comando == 'pula') {
-                    player.y -= comando.argumento * 10;
-                }
-            }
+            // var comando = comandos.shift();
+            // if (comando) {
+            //     if (comando.comando == 'esquerda') {
+            //         for (i = 1; i <= comando.argumento; i++) {
+            //             player.setVelocityX(-160);
+            //             player.anims.play('left', true);
+            //             // player.x -= comando.argumento * 10;
+            //         }
+            //     }
+            //     if (comando.comando == 'direita') {
+            //         for (i = 1; i <= comando.argumento; i++) {
+            //             console.log("aaaaaaaaaaaaa")
+            //             player.setVelocityX(200);
+            //             player.anims.play('right', true);
+            //             // player.x += comando.argumento * 10;
+            //         }
+            //     }
+            //     if (comando.comando == 'pula') {
+            //         player.y -= comando.argumento * 10;
+            //     }
+            // }
         }
 
         function addComando(comando, argumento) {
@@ -246,8 +257,6 @@
             play()
         }
     </script>
-
-
 
 </body>
 
