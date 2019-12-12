@@ -194,17 +194,18 @@
         function play() {
             var comando = comandos.shift();
             if (comando) {
-                if (comando.comando == 'direita') {
-                    player.x += comando.argumento * 10;
-                }
                 if (comando.comando == 'esquerda') {
+                    player.setVelocityX(-160);
+                    player.anims.play('left', true);
                     player.x -= comando.argumento * 10;
                 }
-                if (comando.comando == 'para cima') {
-                    player.y -= comando.argumento * 10;
+                if (comando.comando == 'direita') {
+                    player.setVelocityX(160);
+                player.anims.play('right', true);
+                player.x += comando.argumento * 10;
                 }
-                if (comando.comando == 'para baixo') {
-                    player.y += comando.argumento * 10;
+                if (comando.comando == 'pula') {
+                    player.y -= comando.argumento * 10;
                 }
             }
         }
@@ -242,6 +243,7 @@
             parser.buildParseTrees = true;
             var tree = parser.programa();
             visitor.visitPrograma(tree);
+            play()
         }
     </script>
 
