@@ -32,13 +32,13 @@
         <div id="log">
             Erros:<br />
         </div>
-        <div class="input-div">
-            <textarea id="input"></textarea>
-            <div>
-                <button class="btn btn-primary" onclick="executar()">Executar</button>
-                <button class="btn btn-default" onclick="limpar()">Limpar</button>
-                <button class="btn btn-default" onclick="parar()">Parar</button>
-            </div>
+    </div>
+    <div class="input-div">
+        <textarea id="input"></textarea>
+        <div class="button">
+            <button class="btn btn-secondary" onclick="executar()">Executar</button>
+            <button class="btn btn-secondary" onclick="limpar()">Limpar</button>
+            <button class="btn btn-secondary" onclick="parar()">Parar</button>
         </div>
     </div>
     <ul id="resultado">
@@ -146,9 +146,6 @@
         }
 
         function update() {
-            if (gameOver) {
-                return;
-            }
             var comando = comandos.shift();
             if (comando) {
                 argumento = parseInt(comando.argumento)
@@ -156,14 +153,12 @@
                     player.setVelocityX(-160);
                     player.anims.play('left', true);
                     if (player.x < positionX - argumento) {
-                        setInterval(1000)
                         player.anims.play('turn', true);
                         player.setVelocityX(0);
                         positionX = player.x
                     }
                 }
                 else if (comando.comando == 'direita') {
-                    setInterval(1000)
                     player.setVelocityX(160);
                     player.anims.play('right', true);
                     if (player.x > positionX + argumento) {
@@ -173,12 +168,11 @@
                     }
                 }
                 else if (comando.comando == 'pula') {
-                    console.log(argumento)
                     player.anims.play('turn', true);
-                    if(argumento >= 2){
+                    if (argumento >= 2) {
                         player.setVelocityY(1600);
                     }
-                    else{
+                    else {
                         player.setVelocityY(800)
                     }
                 }

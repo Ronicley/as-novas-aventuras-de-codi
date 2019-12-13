@@ -1,28 +1,41 @@
 body {
-    margin: 66px 10px 10px;
-}
-#game {
-    width: 50%;
-    height: 100%;
-    margin: 10%;
-    grid-area: game;
+    margin: 10px;
 }
 
 #log {
-    min-width: 200px;
-    width: 50%;
-    height: 100%;
+    width: 300px;
+    height: 600px;
     background-color: black;
     color: red;
-    margin: 10%;
-    grid-area: log;
+    margin: 0 20px;
+}
+
+.canvas-console {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .input-div{
-    margin-left: 10%;
-    max-width: 800px;
-    margin-top: 10px;
-    grid-area: input;
+    margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-content: center;
+    justify-content: center;
+}
+
+#input {
+    margin: auto;
+    margin-bottom: 5px;
+    border: #343a40 solid 1.5px;
+    height: 50px;
+    width: 50%;
+    font-family: 'Courier New', Courier, monospace;
+}
+.button{
+    margin: auto;
 }
 .comands{
     font-size: 15px;
@@ -32,22 +45,7 @@ body {
     font-size: 20px;
     font-weight: bold;
 }
-#input {
-    border: #343a40 solid 1.5px;
-    height: 50px;
-    width: 100%;
-    font-family: 'Courier New', Courier, monospace;
-}
 
-.canvas-console {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "game log"
-                         "input .";
-    margin-left: 10px;;
-    margin-right: 20%;
-}
 .h1, h1 {
     margin-right: 90px;
     font-size: 2.5rem;
