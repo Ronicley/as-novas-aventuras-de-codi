@@ -2,12 +2,27 @@ body {
     margin: 66px 10px 10px;
 }
 #game {
-    width: 800px;
-    height: 600px;
-    margin-right: 50px;
+    width: 50%;
+    height: 100%;
+    margin: 10%;
+    grid-area: game;
 }
+
+#log {
+    min-width: 200px;
+    width: 50%;
+    height: 100%;
+    background-color: black;
+    color: red;
+    margin: 10%;
+    grid-area: log;
+}
+
 .input-div{
-    margin-left: 20%;
+    margin-left: 10%;
+    max-width: 800px;
+    margin-top: 10px;
+    grid-area: input;
 }
 .comands{
     font-size: 15px;
@@ -20,20 +35,17 @@ body {
 #input {
     border: #343a40 solid 1.5px;
     height: 50px;
-    width: 800px;
+    width: 100%;
     font-family: 'Courier New', Courier, monospace;
-    margin-top: 10px;
 }
-#log {
-    width: 50%;
-    max-width: 600px;
-    flex-grow: 1;
-    background-color: black;
-    color: red;
-}
+
 .canvas-console {
-    display: flex;
-    margin-left: 20%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "game log"
+                         "input .";
+    margin-left: 10px;;
     margin-right: 20%;
 }
 .h1, h1 {
