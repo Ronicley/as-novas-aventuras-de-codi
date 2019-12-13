@@ -38,6 +38,7 @@
         <div>
             <button class="btn btn-primary" onclick="executar()">Executar</button>
             <button class="btn btn-default" onclick="limpar()">Limpar</button>
+            <button class="btn btn-default" onclick="parar()">Parar</button>
         </div>
     </div>
     <ul id="resultado">
@@ -52,7 +53,7 @@
             physics: {
                 default: 'arcade',
                 arcade: {
-                    gravity: { y: 300 },
+                    gravity: { y: 100 },
                 }
             },
             scene: {
@@ -61,7 +62,9 @@
                 update: update
             }
         };
-
+        var positionX = 0;
+        var positionY = 0;
+        var argumento = 0
         var player;
         var stars;
         var bombs;
@@ -98,7 +101,8 @@
 
             player.setBounce(0.2);
             player.setCollideWorldBounds(true);
-
+            positionX = player.x
+            positionY = player.y
             this.anims.create({
                 key: 'left',
                 frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -118,8 +122,6 @@
                 frameRate: 10,
                 repeat: -1
             });
-
-            cursors = this.input.keyboard.createCursorKeys();
 
             stars = this.physics.add.group({
                 key: 'star',
@@ -148,34 +150,34 @@
                 return;
             }
             var comando = comandos.shift();
-            var teste = 0
-
             if (comando) {
-                while (teste <= comando.argumento) {
-                    console.log("aaa", teste)
-                    if (comando.comando == 'esquerda' && teste <= comando.argumento) {
-                        player.setVelocityX(-160);
-                        player.anims.play('left', true);
-                        teste++
-                        // player.x -= comando.argumento * 10;
-                    }
-                    if (comando.comando == 'direita') {
-                        player.setVelocityX(200);
-                        player.anims.play('right', true);
-                        // player.x += comando.argumento * 10;
-                    }
-                    if (comando.comando == 'pula') {
-                        player.y -= comando.argumento * 10;
-                    }
-                    console.log("bbbbbbbbbbbbbbb", teste)
-                    if (teste >= comando.argumento) {
-                        player.anims.play('turn', true);
-                        player.setVelocityX(0);
-                    }
-                    setInterval(1000);
+                argumento = parseInt(comando.argumento)
+                if (comando.comando == 'esquerda') {
+                    player.setVelocityX(-160);
+                    player.anims.play('left', true);
+                    
+                }
+                else if (comando.comando == 'direita') {
+                    player.setVelocityX(160);
+                    player.anims.play('right', true);
+                }
+                else if (comando.comando == 'pula') {
+                    player.setVelocityY(800);
+                    player.anims.play('turn', true);
                 }
             }
+            if(player.x > positionX+argumento){
+                player.anims.play('turn', true);
+                player.setVelocityX(0);
+                positionX = player.x
+            }
+            if(player.x < positionX - argumento){
+                player.anims.play('turn', true);
+                player.setVelocityX(0);
+                positionX = player.x
+            }
         }
+
 
         function collectStar(player, star) {
             star.disableBody(true, true);
@@ -197,29 +199,6 @@
             player.anims.play('turn');
             gameOver = true;
         }
-        function play() {
-            // var comando = comandos.shift();
-            // if (comando) {
-            //     if (comando.comando == 'esquerda') {
-            //         for (i = 1; i <= comando.argumento; i++) {
-            //             player.setVelocityX(-160);
-            //             player.anims.play('left', true);
-            //             // player.x -= comando.argumento * 10;
-            //         }
-            //     }
-            //     if (comando.comando == 'direita') {
-            //         for (i = 1; i <= comando.argumento; i++) {
-            //             console.log("aaaaaaaaaaaaa")
-            //             player.setVelocityX(200);
-            //             player.anims.play('right', true);
-            //             // player.x += comando.argumento * 10;
-            //         }
-            //     }
-            //     if (comando.comando == 'pula') {
-            //         player.y -= comando.argumento * 10;
-            //     }
-            // }
-        }
 
         function addComando(comando, argumento) {
             comandos.push({ comando, argumento });
@@ -229,6 +208,11 @@
             $('#input').val('');
             $('#resultado').empty();
             game.scene.scenes[0].scene.restart();
+        }
+
+        function parar() {
+            player.setVelocityX(0);
+            player.anims.play('turn', true);
         }
 
         function executar() {
@@ -254,7 +238,6 @@
             parser.buildParseTrees = true;
             var tree = parser.programa();
             visitor.visitPrograma(tree);
-            play()
         }
     </script>
 
